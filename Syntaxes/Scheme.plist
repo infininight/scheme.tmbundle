@@ -6,6 +6,10 @@
 	<array>
 		<string>scm</string>
 		<string>sch</string>
+		<string>sld</string>
+		<string>sls</string>
+		<string>sps</string>
+		<string>ss</string>
 	</array>
 	<key>keyEquivalent</key>
 	<string>^~S</string>
