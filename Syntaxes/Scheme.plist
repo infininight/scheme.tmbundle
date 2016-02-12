@@ -2,26 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>comment</key>
-	<string>
-		The foldings do not currently work the way I want them to. This
-		may be a limitation of the way they are applied rather than the
-		regexps in use. Nonetheless, the foldings will end on the last
-		identically indented blank line following an s-expression. Not
-		ideal perhaps, but it works. Also, the #illegal pattern never
-		matches an unpaired ( as being illegal. Why?! -- Rob Rix
-		
-		Ok, hopefully this grammar works better on quoted stuff now.  It
-		may break for fancy macros, but should generally work pretty
-		smoothly.  -- Jacob Rus
-		
-		I have attempted to get this under control but because of the way folding
-		and indentation interact in Textmate, I am not sure if it is possible. In the
-		meantime, I have implemented Python-style folding anchored at newlines.
-		Additionally, I have made some minor improvements to the numeric constant
-		highlighting. Next up is square bracket expressions, I guess, but that
-		should be trivial. -- ozy`
-	</string>
 	<key>fileTypes</key>
 	<array>
 		<string>scm</string>
