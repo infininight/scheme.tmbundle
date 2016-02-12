@@ -19,7 +19,7 @@
 	<array>
 		<dict>
 			<key>include</key>
-			<string>#comment</string>
+			<string>#comments</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -44,39 +44,173 @@
 	</array>
 	<key>repository</key>
 	<dict>
-		<key>comment</key>
+		<key>comments</key>
 		<dict>
-			<key>begin</key>
-			<string>(^[ \t]+)?(?=;)</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.whitespace.comment.leading.scheme</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>(?!\G)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>;</string>
+					<string>(^[ \t]+)?(?=;)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.whitespace.comment.leading.scheme</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?!\G)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>begin</key>
+							<string>;</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.comment.scheme</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>\n</string>
+							<key>name</key>
+							<string>comment.line.semicolon.scheme</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(^[ \t]+)?(?=#!r6rs\s*$)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.whitespace.comment.leading.scheme</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?!\G)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>begin</key>
+							<string>#!</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>0</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.comment.scheme</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>\n</string>
+							<key>name</key>
+							<string>comment.line.number-sign.r6rs.scheme</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>#\|</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.comment.scheme</string>
+							<string>punctuation.definition.comment.begin.scheme</string>
 						</dict>
 					</dict>
 					<key>end</key>
-					<string>\n</string>
+					<string>\|#</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.end.scheme</string>
+						</dict>
+					</dict>
 					<key>name</key>
-					<string>comment.line.semicolon.scheme</string>
+					<string>comment.block.scheme</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#nested-comment</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(^[ \t]+)?(?=#;\s*\()</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.whitespace.comment.leading.scheme</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>SUPPORT FOR SQUARE BRACES</string>
+					<key>end</key>
+					<string>(?!\G)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>begin</key>
+							<string>(#;)\s*\(</string>
+							<key>end</key>
+							<string>\)</string>
+							<key>name</key>
+							<string>comment.block.datum.scheme</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#nested-parens</string>
+								</dict>
+							</array>
+						</dict>
+					</array>
 				</dict>
 			</array>
+			<key>repository</key>
+			<dict>
+				<key>nested-comment</key>
+				<dict>
+					<key>begin</key>
+					<string>#\|</string>
+					<key>end</key>
+					<string>\|#</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#nested-comment</string>
+						</dict>
+					</array>
+				</dict>
+				<key>nested-parens</key>
+				<dict>
+					<key>begin</key>
+					<string>\(</string>
+					<key>end</key>
+					<string>\)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#nested-parens</string>
+						</dict>
+					</array>
+				</dict>
+			</dict>
 		</dict>
 		<key>constants</key>
 		<dict>
@@ -445,7 +579,7 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#comment</string>
+					<string>#comments</string>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -496,7 +630,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#comment</string>
+							<string>#comments</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -558,7 +692,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#comment</string>
+							<string>#comments</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -594,7 +728,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#comment</string>
+							<string>#comments</string>
 						</dict>
 						<dict>
 							<key>include</key>
