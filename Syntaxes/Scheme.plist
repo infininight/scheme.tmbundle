@@ -348,89 +348,249 @@
 		</dict>
 		<key>expressions</key>
 		<dict>
-			<key>begin</key>
-			<string>(\()</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.section.expression.begin.scheme</string>
-				</dict>
-			</dict>
-			<key>end</key>
-			<string>(\))(\n)?</string>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.section.expression.end.scheme</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>meta.after-expression.scheme</string>
-				</dict>
-			</dict>
-			<key>name</key>
-			<string>meta.expression.scheme</string>
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>include</key>
-					<string>#comments</string>
-				</dict>
-				<dict>
 					<key>begin</key>
-					<string>(?x)
-						(?&lt;=\()       # preceded by (
-						(define)\s+   # define
-						(\()          # list of parameters
-						  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)
-						  ((\s+
-						    ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
-						   )*
-						  )\s*
-						(\))
-					</string>
-					<key>captures</key>
+					<string>(\()</string>
+					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.control.scheme</string>
+							<string>punctuation.section.expression.begin.scheme</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(\))(\n)?</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.expression.end.scheme</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.function.scheme</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>entity.name.function.scheme</string>
-						</dict>
-						<key>4</key>
-						<dict>
-							<key>name</key>
-							<string>variable.parameter.function.scheme</string>
-						</dict>
-						<key>7</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.function.scheme</string>
+							<string>meta.after-expression.scheme</string>
 						</dict>
 					</dict>
-					<key>end</key>
-					<string>(?=\))</string>
 					<key>name</key>
-					<string>meta.declaration.procedure.scheme</string>
+					<string>meta.expression.scheme</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
 							<string>#comments</string>
+						</dict>
+						<dict>
+							<key>begin</key>
+							<string>(?x)
+								(?&lt;=\()       # preceded by (
+								(define)\s+   # define
+								(\()          # list of parameters
+								  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)
+								  ((\s+
+								    ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
+								   )*
+								  )\s*
+								(\))
+							</string>
+							<key>captures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>keyword.control.scheme</string>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.function.scheme</string>
+								</dict>
+								<key>3</key>
+								<dict>
+									<key>name</key>
+									<string>entity.name.function.scheme</string>
+								</dict>
+								<key>4</key>
+								<dict>
+									<key>name</key>
+									<string>variable.parameter.function.scheme</string>
+								</dict>
+								<key>7</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.function.scheme</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>(?=\))</string>
+							<key>name</key>
+							<string>meta.declaration.procedure.scheme</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#comments</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#expressions</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#illegal</string>
+								</dict>
+							</array>
+						</dict>
+						<dict>
+							<key>begin</key>
+							<string>(?x)
+								(?&lt;=\() # preceded by (
+								(lambda)\s+
+								(\() # opening paren
+								((?:
+								  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
+								  \s+
+								)*(?:
+								  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
+								)?)
+								(\)) # closing paren
+							</string>
+							<key>captures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>keyword.control.scheme</string>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.variable.scheme</string>
+								</dict>
+								<key>3</key>
+								<dict>
+									<key>name</key>
+									<string>variable.parameter.scheme</string>
+								</dict>
+								<key>6</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.definition.variable.scheme</string>
+								</dict>
+							</dict>
+							<key>comment</key>
+							<string>
+								Not sure this one is quite correct.  That \s* is
+								particularly troubling
+							</string>
+							<key>end</key>
+							<string>(?=\))</string>
+							<key>name</key>
+							<string>meta.declaration.procedure.scheme</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#comments</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#expressions</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#illegal</string>
+								</dict>
+							</array>
+						</dict>
+						<dict>
+							<key>begin</key>
+							<string>(?&lt;=\()(define)\s([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)\s*.*?</string>
+							<key>captures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>keyword.control.scheme</string>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>variable.other.scheme</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>(?=\))</string>
+							<key>name</key>
+							<string>meta.declaration.variable.scheme</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#comments</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#expressions</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#illegal</string>
+								</dict>
+							</array>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#quote-sexp</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#quote</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#language-functions</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#string</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#constants</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>(?&lt;=[\(\s])(#\\)(space|newline|tab)(?=[\s\)])</string>
+							<key>name</key>
+							<string>constant.character.named.scheme</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>(?&lt;=[\(\s])(#\\)x[0-9A-F]{2,4}(?=[\s\)])</string>
+							<key>name</key>
+							<string>constant.character.hex-literal.scheme</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>(?&lt;=[\(\s])(#\\).(?=[\s\)])</string>
+							<key>name</key>
+							<string>constant.character.escape.scheme</string>
+						</dict>
+						<dict>
+							<key>comment</key>
+							<string>
+								the . in (a . b) which conses together two elements
+								a and b. (a b c) == (a . (b . (c . nil)))
+							</string>
+							<key>match</key>
+							<string>(?&lt;=[ ()])\.(?=[ ()])</string>
+							<key>name</key>
+							<string>punctuation.separator.cons.scheme</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -441,161 +601,6 @@
 							<string>#illegal</string>
 						</dict>
 					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>(?x)
-						(?&lt;=\() # preceded by (
-						(lambda)\s+
-						(\() # opening paren
-						((?:
-						  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
-						  \s+
-						)*(?:
-						  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
-						)?)
-						(\)) # closing paren
-					</string>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.control.scheme</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.variable.scheme</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>variable.parameter.scheme</string>
-						</dict>
-						<key>6</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.variable.scheme</string>
-						</dict>
-					</dict>
-					<key>comment</key>
-					<string>
-						Not sure this one is quite correct.  That \s* is
-						particularly troubling
-					</string>
-					<key>end</key>
-					<string>(?=\))</string>
-					<key>name</key>
-					<string>meta.declaration.procedure.scheme</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#comments</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#expressions</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#illegal</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>(?&lt;=\()(define)\s([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)\s*.*?</string>
-					<key>captures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.control.scheme</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>variable.other.scheme</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>(?=\))</string>
-					<key>name</key>
-					<string>meta.declaration.variable.scheme</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#comments</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#expressions</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#illegal</string>
-						</dict>
-					</array>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#quote-sexp</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#quote</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#language-functions</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#string</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#constants</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>(?&lt;=[\(\s])(#\\)(space|newline|tab)(?=[\s\)])</string>
-					<key>name</key>
-					<string>constant.character.named.scheme</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>(?&lt;=[\(\s])(#\\)x[0-9A-F]{2,4}(?=[\s\)])</string>
-					<key>name</key>
-					<string>constant.character.hex-literal.scheme</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>(?&lt;=[\(\s])(#\\).(?=[\s\)])</string>
-					<key>name</key>
-					<string>constant.character.escape.scheme</string>
-				</dict>
-				<dict>
-					<key>comment</key>
-					<string>
-						the . in (a . b) which conses together two elements
-						a and b. (a b c) == (a . (b . (c . nil)))
-					</string>
-					<key>match</key>
-					<string>(?&lt;=[ ()])\.(?=[ ()])</string>
-					<key>name</key>
-					<string>punctuation.separator.cons.scheme</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#expressions</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#illegal</string>
 				</dict>
 			</array>
 		</dict>
