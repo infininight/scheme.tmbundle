@@ -23,11 +23,11 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#expressions</string>
+			<string>#definitions</string>
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#definitions</string>
+			<string>#expressions</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -333,6 +333,88 @@
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>begin</key>
+					<string>('?\()(quote)(?=\s|\(|\[)|('\()</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.punctuation.section.expression.begin.scheme</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.quote.scheme</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.punctuation.section.expression.begin.scheme</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\)</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>invalid.illegal.punctuation.section.expression.end.scheme</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>meta.expression.quote.scheme</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#contents</string>
+						</dict>
+					</array>
+					<key>repository</key>
+					<dict>
+						<key>contents</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#nesting</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#string</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#constants</string>
+								</dict>
+								<dict>
+									<key>match</key>
+									<string>[[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*</string>
+									<key>name</key>
+									<string>invalid.deprecated.meta.identifier.scheme</string>
+								</dict>
+							</array>
+						</dict>
+						<key>nesting</key>
+						<dict>
+							<key>begin</key>
+							<string>\(</string>
+							<key>end</key>
+							<string>\)</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#contents</string>
+								</dict>
+							</array>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
 					<key>include</key>
 					<string>#quote</string>
 				</dict>
@@ -416,8 +498,15 @@
 								</dict>
 								<key>4</key>
 								<dict>
-									<key>name</key>
-									<string>variable.parameter.function.scheme</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>match</key>
+											<string>\S+</string>
+											<key>name</key>
+											<string>variable.parameter.function.scheme</string>
+										</dict>
+									</array>
 								</dict>
 								<key>7</key>
 								<dict>
